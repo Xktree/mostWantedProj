@@ -31,8 +31,17 @@ function app(people) {
         case "no":
             //! TODO #4: Declare a searchByTraits (multiple traits) function //////////////////////////////////////////
                 //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
+        function searchByTraits(){
+            let userTraits = promptFor("Would you like to search with single or multiple traits?\n\n Please type in search criteria without spaces then the value.\n Enter multiple traits as separated by a semicolon (no space around the semicolon).\n\n (Ex. Single Criteria: eyecolor brown)\n (Ex. Multiple Criteria: eyecolor brown;weight 175):").toLowerCase();
+            let traits = data.filter(function(people){
+                if(userTraits === "gender female");
+            });
+            return traits;
+        }
             searchResults = searchByTraits(people);
+            console.log(`The following individuals match the search criteria: ${firstName} ${lastName}`, searchResults);
             break;
+
         default:
             // Re-initializes the app() if neither case was hit above. This is an instance of recursion.
             app(people);
@@ -66,14 +75,19 @@ function mainMenu(person, people) {
         case "info":
             //! TODO #1: Utilize the displayPerson function //////////////////////////////////////////
             // HINT: Look for a person-object stringifier utility function to help
+
             let personInfo = displayPerson(person[0]);
             alert(personInfo);
-            break;
+        
+        break;
         case "family":
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
             // HINT: Look for a people-collection stringifier utility function to help
+        
+        function findPersonFamily(){
             let personFamily = findPersonFamily(person[0], people);
             alert(personFamily);
+        }
             break;
         case "descendants":
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
@@ -138,7 +152,7 @@ function displayPeople(people) {
  * @param {Object} person       A singular object.
  */
 function displayPerson(person) {
-    let personInfo = `First Name: ${person.firstName}\n Last Name: ${person.lastName}\n Gender: ${person.gender}\n Id: ${person.id}\n Date of Birth: ${person.dob}\n Height: ${person.height}\n Weight: ${person.weight}\n Eye Color: ${person.eyeColor}\n Occupation: ${person.occupation}\n Parents: ${person.parents}\n Current Spouse: ${person.currentSpouse}\n`
+    let personInfo = `First Name: ${person.firstName}\n Last Name: ${person.lastName}\n Gender: ${person.gender}\n Date of Birth: ${person.dob}\n Height: ${person.height}\n Weight: ${person.weight}\n Eye Color: ${person.eyeColor}\n Occupation: ${person.occupation}\n`
 
     //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
     alert(personInfo);
