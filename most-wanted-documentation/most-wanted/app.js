@@ -138,8 +138,8 @@ function displayPeople(people) {
  * @param {Object} person       A singular object.
  */
 function displayPerson(person) {
-    let personInfo = `First Name: ${person.firstName}\n`;
-    personInfo += `Last Name: ${person.lastName}\n`;
+    let personInfo = `First Name: ${person.firstName}\n Last Name: ${person.lastName}\n Gender: ${person.gender}\n Id: ${person.id}\n Date of Birth: ${person.dob}\n Height: ${person.height}\n Weight: ${person.weight}\n Eye Color: ${person.eyeColor}\n Occupation: ${person.occupation}\n Parents: ${person.parents}\n Current Spouse: ${person.currentSpouse}\n`
+
     //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
     alert(personInfo);
 }
