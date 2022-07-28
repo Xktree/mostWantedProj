@@ -64,7 +64,7 @@ function mainMenu(person, people) {
     // Routes our application based on the user's input
     switch (displayOption) {
         case "info":
-            //! TODO #1: Utilize the displayPerson function //////////////////////////////////////////
+            //! TODO #1: Utilize the displayPerson function ////////////////////////////////////////// (DONE)
             // HINT: Look for a person-object stringifier utility function to help
             let personInfo = displayPerson(person[0]);
             alert(personInfo);
@@ -185,17 +185,39 @@ function chars(input) {
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 
-// Function to return inputted user siblings 
+// TODO 2: Function to return inputted user siblings 
+
+function parentsFilter(person, people){
+    let hasParents = people.filter(function(parentName){
+        let mutual
+    })
+}
 
 function siblingFilter(person, people){
     let hasSiblings = people.filter(function(siblingName){
-        let bothHaveCommonParents = false;
+        let mutualParents = false;
         for(let i = 0; i < siblingName.parents.length; i++){
             if(person.parents.includes(siblingName.parents[i])){
-                bothHaveCommonParents = true;
+            if(person != siblingName)
+                mutualParents = true;
             }
         }
-        return bothHaveCommonParents;
+        return mutualParents;
     });
     return hasSiblings;
 }
+
+functio
+
+function userFamily(person, people){
+    let parents = parentsFilter(person, people);
+    let siblings = siblingFilter(person, people);
+    let spouse = spouseFilter(person, people);
+}
+
+function displayFamily(person){
+    let userFamily = `Here are the requested individual's family relations\n\n Parents: ${person.parents}\n Siblings: ${person.siblings} Spouse: ${person.spouse}\n`;
+    alert(userFamily);
+}
+
+    
