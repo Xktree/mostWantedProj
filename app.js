@@ -31,10 +31,28 @@ function app(people) {
         case "no":
             //! TODO #4: Declare a searchByTraits (multiple traits) function //////////////////////////////////////////
                 //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
-            searchResults = searchByTraits(people);
+        function searchByTraits(people){
+            let userTraits = promptFor("Would you like to search with single or multiple traits?\n\n Please type in search criteria without spaces then the value.\n Enter multiple traits as separated by a semicolon (no space around the semicolon).\n\n (Ex. Single Criteria: eyecolor brown)\n (Ex. Multiple Criteria: eyecolor brown;weight 175):", chars).toLowerCase();
+            let getTraits = ('male', 'female', 'height', 'weight', 'eyeColor')
+            let traits = people.filter(function(person){
+                if(userTraits === getTraits){
+                    return true 
+                // }
+                // if(userTraits === getTraits){
+                //     return false;
+                    
+                // }
+                
+
+        }});
+            return traits;
+        }
+ searchResults = searchByTraits(people);
+            console.log(`The following individuals match the search criteria: ${people.firstName} ${people.lastName}`, searchResults);
             break;
-        default:
-            // Re-initializes the app() if neither case was hit above. This is an instance of recursion.
+
+    default:
+        // Re-initializes the app() if neither case was hit above. This is an instance of recursion.
             app(people);
             break;
     }
@@ -68,7 +86,8 @@ function mainMenu(person, people) {
             // HINT: Look for a person-object stringifier utility function to help
             let personInfo = displayPerson(person[0]);
             alert(personInfo);
-        break;
+        
+            break;
         case "family":
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
             // HINT: Look for a people-collection stringifier utility function to help
