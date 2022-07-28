@@ -73,7 +73,7 @@ function mainMenu(person, people) {
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
             // HINT: Look for a people-collection stringifier utility function to help
             let personFamily = findPersonFamily(person[0], people);
-            alert(personFamily);
+            alert(personFamily);    
             break;
         case "descendants":
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
@@ -185,12 +185,23 @@ function chars(input) {
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 
-// TODO 2: Function to return inputted user siblings 
+// TODO 2: Functions to find family details: parents, siblings, spouse, exception
+
+function existenceOfFamilyMember(person){
+    if(person){
+        return `${person.firstName} ${person.lastName}` 
+    }
+        return "This individual does not exist"  
+}
 
 function parentsFilter(person, people){
-    let hasParents = people.filter(function(parentName){
-        let mutual
+    let hasParents = person.parents.map(function(parentalId){
+        let hasParent = people.filter(function(parentName){
+            return parentalId === parentName.id
+        });
+            return hasParent;
     })
+    return hasParents;
 }
 
 function siblingFilter(person, people){
@@ -207,16 +218,19 @@ function siblingFilter(person, people){
     return hasSiblings;
 }
 
-functio
+function spouseFilter(person, people){
+    let hasSpouse = people.filter(function(spouseName){
+    return person.spouse === spouseName.id
+    });
+    return hasSpouse
+}
 
-function userFamily(person, people){
+function findPersonFamily(person, people){
     let parents = parentsFilter(person, people);
     let siblings = siblingFilter(person, people);
     let spouse = spouseFilter(person, people);
-}
 
-function displayFamily(person){
-    let userFamily = `Here are the requested individual's family relations\n\n Parents: ${person.parents}\n Siblings: ${person.siblings} Spouse: ${person.spouse}\n`;
+    let userFamily = `Here are the requested individual's family relations\n\n Parents: ${parents.map(parent => `${parent.firstName} ${parent.lastName}`).join(",")}\n Siblings: ${siblings.map(sibling => `${sibling.firstName} ${sibling.lastName}`).join(",")}\n Spouse: ${existenceOfFamilyMember(spouse)}\n`;
     alert(userFamily);
 }
 
