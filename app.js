@@ -82,9 +82,8 @@ function mainMenu(person, people) {
     // Routes our application based on the user's input
     switch (displayOption) {
         case "info":
-            //! TODO #1: Utilize the displayPerson function //////////////////////////////////////////
+            //! TODO #1: Utilize the displayPerson function ////////////////////////////////////////// (DONE)
             // HINT: Look for a person-object stringifier utility function to help
-
             let personInfo = displayPerson(person[0]);
             alert(personInfo);
         
@@ -92,11 +91,8 @@ function mainMenu(person, people) {
         case "family":
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
             // HINT: Look for a people-collection stringifier utility function to help
-        
-        function findPersonFamily(){
             let personFamily = findPersonFamily(person[0], people);
             alert(personFamily);
-        }
             break;
         case "descendants":
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
@@ -163,7 +159,7 @@ function displayPeople(people) {
 function displayPerson(person) {
     let personInfo = `First Name: ${person.firstName}\n Last Name: ${person.lastName}\n Gender: ${person.gender}\n Date of Birth: ${person.dob}\n Height: ${person.height}\n Weight: ${person.weight}\n Eye Color: ${person.eyeColor}\n Occupation: ${person.occupation}\n`
 
-    //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
+    //! TODO #1a: finish getting the rest of the information to display ////////////////////////////////////////// (DONE)
     alert(personInfo);
 }
 // End of displayPerson()
@@ -207,3 +203,40 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
+
+// TODO 2: Function to return inputted user siblings 
+
+function parentsFilter(person, people){
+    let hasParents = people.filter(function(parentName){
+        let mutual
+    })
+}
+
+function siblingFilter(person, people){
+    let hasSiblings = people.filter(function(siblingName){
+        let mutualParents = false;
+        for(let i = 0; i < siblingName.parents.length; i++){
+            if(person.parents.includes(siblingName.parents[i])){
+            if(person != siblingName)
+                mutualParents = true;
+            }
+        }
+        return mutualParents;
+    });
+    return hasSiblings;
+}
+
+functio
+
+function userFamily(person, people){
+    let parents = parentsFilter(person, people);
+    let siblings = siblingFilter(person, people);
+    let spouse = spouseFilter(person, people);
+}
+
+function displayFamily(person){
+    let userFamily = `Here are the requested individual's family relations\n\n Parents: ${person.parents}\n Siblings: ${person.siblings} Spouse: ${person.spouse}\n`;
+    alert(userFamily);
+}
+
+    
