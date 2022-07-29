@@ -118,15 +118,16 @@ function mainMenu(person, people) {
         case "info":
             //! TODO #1: Utilize the displayPerson function ////////////////////////////////////////// (DONE)
             // HINT: Look for a person-object stringifier utility function to help
-            let personInfo = displayPerson(person[0]);
-            alert(personInfo);
-        
+            displayPerson(person[0]);
+            return mainMenu(person, people);
             break;
         case "family":
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
             // HINT: Look for a people-collection stringifier utility function to help
-            let personFamily = findPersonFamily(person[0], people);
-            alert(personFamily);    
+            parentsFilter(person[0], people);
+            siblingFilter(person[0], people);
+            spouseFilter(person[0], people);
+           return mainMenu(person, people);
             break;
         case "descendants":
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
@@ -163,6 +164,9 @@ function searchByName(people) {
         if (person.firstName === firstName && person.lastName === lastName) {
             return true;
         }
+        else{
+            return false;
+        }
     });
     return foundPerson;
 }
@@ -191,7 +195,7 @@ function displayPeople(people) {
  * @param {Object} person       A singular object.
  */
 function displayPerson(person) {
-    let personInfo = `First Name: ${person.firstName}\n Last Name: ${person.lastName}\n Gender: ${person.gender}\n Date of Birth: ${person.dob}\n Height: ${person.height}\n Weight: ${person.weight}\n Eye Color: ${person.eyeColor}\n Occupation: ${person.occupation}\n`
+    let personInfo = `First Name: ${person.firstName}\nLast Name: ${person.lastName}\nGender: ${person.gender}\nDate of Birth: ${person.dob}\nHeight: ${person.height}\nWeight: ${person.weight}\nEye Color: ${person.eyeColor}\nOccupation: ${person.occupation}\n`
 
     //! TODO #1a: finish getting the rest of the information to display ////////////////////////////////////////// (DONE)
     alert(personInfo);
@@ -240,53 +244,55 @@ function chars(input) {
 
 // TODO 2: Functions to find family details: parents, siblings, spouse, exception
 
-function existenceOfFamilyMember(person){
-    if(person){
-        return `${person.firstName} ${person.lastName}` 
-    }
-        return "This individual does not exist"  
-}
-
 function parentsFilter(person, people){
-    let hasParents = person.parents.map(function(parentalId){
-        let hasParent = people.filter(function(parentName){
-            return parentalId === parentName.id
-        });
-            return hasParent;
-    })
-    return hasParents;
-}
-
-function siblingFilter(person, people){
-    let hasSiblings = people.filter(function(siblingName){
-        let mutualParents = false;
-        for(let i = 0; i < siblingName.parents.length; i++){
-            if(person.parents.includes(siblingName.parents[i])){
-            if(person != siblingName)
-                mutualParents = true;
-            }
+    let familyMember = people.filter(function(el){
+        if(el.id === person.parents[0] || el.id === person.parents [1]){
+            return true;
         }
-        return mutualParents;
-    });
-    return hasSiblings;
+        else{
+            return false;
+        }
+    })
+    findPersonFamily(familyMember, "Parent");
 }
-
-function spouseFilter(person, people){
-    let hasSpouse = people.filter(function(spouseName){
-    return person.spouse === spouseName.id
-    });
-    return hasSpouse
-}
-
-function findPersonFamily(person, people){
-    let parents = parentsFilter(person, people);
-    let siblings = siblingFilter(person, people);
-    let spouse = spouseFilter(person, people);
-
-    let userFamily = `Here are the requested individual's family relations\n\n Parents: ${parents.map(parent => `${parent.firstName} ${parent.lastName}`).join(",")}\n Siblings: ${siblings.map(sibling => `${sibling.firstName} ${sibling.lastName}`).join(",")}\n Spouse: ${existenceOfFamilyMember(spouse)}\n`;
-    alert(userFamily);
-}
-
     
+function siblingFilter(person, people){
+    let familyMember = people.filter(function(el){
+    let lengthOfParentString = el.parents;
+        if(el.id === person.id){
+            return false;
+        }
+        else if(lengthOfParentString < 2){
+            return false;
+        }
+        else if(el.parents[0] === person.parents[0] || el.parents[0] === person.parents[1] || el.parents[1] === person.parents[0] || el.parents[1] === person.parents[1]){
+            return true;
+        }
+        else{
+            return false;
+        }
+    })
+    findPersonFamily(familyMember, "Sibling");
+}
+function spouseFilter(person, people){
+    let familyMember = people.filter(function(el){
+        if(el.currentSpouse === person.id){
+            return true;
+        }
+        else{
+            return false;
+        }
+    })
+    findPersonFamily(familyMember, "Spouse");
+}
 
-
+function findPersonFamily(familyMember, knownRelationship){
+    if(familyMember.length < 1){
+        alert("There is no individual found for this relations field in our database.")
+    }
+    else{
+        alert(familyMember.map(function(person){
+            return knownRelationship + ": " + person.firstName + " " + person.lastName; 
+        }).join("\n"));
+    }
+}
