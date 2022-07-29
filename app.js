@@ -32,23 +32,57 @@ function app(people) {
             //! TODO #4: Declare a searchByTraits (multiple traits) function //////////////////////////////////////////
                 //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
         function searchByTraits(people){
-            let userTraits = promptFor("Would you like to search with single or multiple traits?\n\n Please type in search criteria without spaces then the value.\n Enter multiple traits as separated by a semicolon (no space around the semicolon).\n\n (Ex. Single Criteria: eyecolor brown)\n (Ex. Multiple Criteria: eyecolor brown;weight 175):", chars).toLowerCase();
-            let getTraits = ('male', 'female', 'height', 'weight', 'eyeColor')
-            let traits = people.filter(function(person){
-                if(userTraits === getTraits){
-                    return true 
-                // }
-                // if(userTraits === getTraits){
-                //     return false;
-                    
-                // }
-                
+        let getTraits = prompt("Would you like to search with single or multiple traits?\n\n Please type in search criteria without spaces then the value.\n Enter multiple traits as separated by a semicolon (no space around the semicolon).\n\n (Ex. Single Criteria: eyecolor brown)\n (Ex. Multiple Criteria: eyecolor brown;weight 175):", chars).toLowerCase()
+        
+        switch(getTraits){
+            case 'gender':
+                let getGender = prompt('what gender would you like to search for Male or Female')
 
-        }});
-            return traits;
+            let userTraits =people.filter(function(person){
+                if (person.gender === getGender){
+                    return true
+                
+                }});
+            console.log (userTraits)
+            return userTraits
+
+            case 'height':
+                let getHeight = prompt('What height by inches would you like to search by\n Ex: 70')
+            let userHeight = people.filter(function(person){
+                if (person.height === getHeight){
+                    return true
+                }});
+                console.log(userHeight)
+                return userTraits
+
         }
- searchResults = searchByTraits(people);
-            console.log(`The following individuals match the search criteria: ${people.firstName} ${people.lastName}`, searchResults);
+
+            // case 'Height':
+            //     if (getTraits === height){
+            //         getTraits = []
+            //         return person.height
+                    
+            //     }
+            //     return userTraits
+
+            // case 'Weight':
+            //     if
+            //     return
+
+            // case 'eyecolor':
+            //     if
+            //     return
+            
+            // case 'Occupation':
+            //     if
+            //     return
+
+            // case 'date of birth':
+            //     if
+            //     return
+        }
+searchResults = searchByTraits(people);
+console.log(`The following individuals match the search criteria: ${people.firstName} ${people.lastName}`, searchResults);
             break;
 
     default:
@@ -254,3 +288,5 @@ function findPersonFamily(person, people){
 }
 
     
+
+
