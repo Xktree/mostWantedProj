@@ -55,31 +55,43 @@ function app(people) {
                 console.log(userHeight)
                 return userTraits
 
+            case 'weight':
+                let getWeight = prompt('What Weight in lbs would you like to search by\n Ex: 170')
+            let userWeight = people.filter(function(person){
+                if (person.weight === getWeight){           
+                return true
+            }});
+            console.log(userWeight)
+            return getTraits
+
+            case 'eyecolor':
+                let getEyeColor = prompt('What eyecolor would you like to search for\n Ex: blue')
+            let userEyeColor = people.filter(function(person){
+                if (person.eyeColor === getEyeColor){
+                return true
+            }});
+            console.log(userEyeColor)
+            return getTraits
+
+            case 'occupation':
+                let getOccupation = prompt('What occupation would you like to search for\n Ex: programmer')
+            let userOccupation = people.filter(function(person){
+                if (person.occupation === getOccupation){
+                    return true
+            }});
+            console.log(userOccupation)
+            return getTraits
+
+            case 'Date of birth':
+                let getDOB = prompt('What DOB would you like to search for\n Ex: 1/18/1949')
+            let userDOB = people.filter(function(person){
+                if (person.dob === getDOB){
+                    return true
+            }})
+
         }
 
-            // case 'Height':
-            //     if (getTraits === height){
-            //         getTraits = []
-            //         return person.height
-                    
-            //     }
-            //     return userTraits
-
-            // case 'Weight':
-            //     if
-            //     return
-
-            // case 'eyecolor':
-            //     if
-            //     return
-            
-            // case 'Occupation':
-            //     if
-            //     return
-
-            // case 'date of birth':
-            //     if
-            //     return
+        
         }
 searchResults = searchByTraits(people);
 console.log(`The following individuals match the search criteria: ${people.firstName} ${people.lastName}`, searchResults);
