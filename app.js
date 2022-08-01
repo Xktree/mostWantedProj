@@ -254,11 +254,12 @@ function findPersonFamily(familyMember, knownRelationship){
     }
 }
 
-//unable to figure out the height and weight and dob since they are number and my comes back as a string.
 // Function to return a list of descendants - logic similar to parent function 
+// Couldn't figure out solution, returning a undefined error
 
-function findPersonDescendants(familyMember, people){
+function findPersonDescendants(person, people){
     let descendants = []
+        }
 
     function findChildren(person){
         let familyMember = people.filter(function(child){
@@ -283,8 +284,72 @@ function findPersonDescendants(familyMember, people){
     findPersonFamily(familyMember, "Descendant");
 }
 
-//unable to figure out the height and weight and dob since they are number and my comes back as a string.
-//created Function to show the searchbytraits function and take advatage of switch cases
+//created Function to show the searchbytraits function and take advatage of switch cases; also created functions for each trait search 
+
+function getGender(people){
+    let userGender = prompt('what gender would you like to search for Male or Female',chars)
+
+    let searchResults = people.filter(function(people){
+        if(people.gender === userGender){
+            return true;
+        }
+    })
+    return searchResults
+}
+function getHeight(people){
+    let userHeight = promptFor('What height by inches would you like to search by\n Ex: 70',chars)
+
+    let searchResults = people.filter(function(people){
+        if(people.height == userHeight){
+            return true;
+        }
+    })
+    return searchResults
+}
+function getWeight(people){
+    let userWeight = promptFor('What Weight in lbs would you like to search by\n Ex: 170',chars)
+
+    let searchResults = people.filter(function(people){
+        if(people.weight == userWeight){
+            return true;
+        }
+    })
+    return searchResults
+}
+function getEyeColor(people){
+    let userEyeColor = prompt('What eyecolor would you like to search for\n Ex: blue', chars)
+    let searchResults = people.filter(function(people){
+        if(people.eyeColor === userEyeColor){
+            return true;
+        }
+    })
+    return searchResults
+}
+function getOccupation(people){
+    let userOccupation = prompt('What occupation would you like to search for\n Ex: programmer', chars)
+    let searchResults = people.filter(function(people){
+        if(people.occupation === userOccupation){
+            return true;
+        }
+    })
+    return searchResults
+}
+function getDOB(people){
+    let userDOB = promptFor('What DOB would you like to search for\n Ex: 1/18/1949',chars)
+    let searchResults = people.filter(function(people){
+        if(people.dob == userDOB){
+            return true;
+        }
+    })
+    return searchResults
+}
+function getResults(searchResults){
+    let userOutcome = `Name: ${searchResults[0].firstName} ${searchResults[0].lastName}\n`;
+    for(let i =1;i < searchResults.length;i++){
+        userOutcome += `Name: ${searchResults[i].firstName} ${searchResults[i].lastName}\n`;
+    }
+    return userOutcome
+}
 
 function searchByTraits(people){
     let searchResults = people;
@@ -351,71 +416,6 @@ function searchByTraits(people){
         }
     }
     return searchResults
-}
-
-function getGender(people){
-    let userGender = prompt('what gender would you like to search for Male or Female',chars)
-
-    let searchResults = people.filter(function(people){
-        if(people.gender === userGender){
-            return true;
-        }
-    })
-    return searchResults
-}
-function getHeight(people){
-    let userHeight = promptFor('What height by inches would you like to search by\n Ex: 70',chars)
-
-    let searchResults = people.filter(function(people){
-        if(people.height === userHeight){
-            return true;
-        }
-    })
-    return searchResults
-}
-function getWeight(people){
-    let userWeight = promptFor('What Weight in lbs would you like to search by\n Ex: 170',chars)
-
-    let searchResults = people.filter(function(people){
-        if(people.weight === userWeight){
-            return true;
-        }
-    })
-    return searchResults
-}
-function getEyeColor(people){
-    let userEyeColor = prompt('What eyecolor would you like to search for\n Ex: blue', chars)
-    let searchResults = people.filter(function(people){
-        if(people.eyeColor === userEyeColor){
-            return true;
-        }
-    })
-    return searchResults
-}
-function getOccupation(people){
-    let userOccupation = prompt('What occupation would you like to search for\n Ex: programmer', chars)
-    let searchResults = people.filter(function(people){
-        if(people.occupation === userOccupation){
-            return true;
-        }
-    })
-    return searchResults
-}
-function getDOB(people){
-    let userDOB = promptFor('What DOB would you like to search for\n Ex: 1/18/1949',chars)
-    let searchResults = people.filter(function(people){
-        if(people.dob === userDOB){
-            return true;
-        }
-    })
-    return searchResults
-}
-function getResults(searchResults){
-    let userOutcome = `Name: ${searchResults[0].firstName} ${searchResults[0].lastName}\n`;
-    for(let i =1;i < searchResults.length;i++){
-        userOutcome += `Name: ${searchResults[i].firstName} ${searchResults[i].lastName}\n`;
-    }
-    return userOutcome
 }
 
 

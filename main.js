@@ -27,11 +27,3 @@
 
 // (5 points): As a user, after locating a person, I want to see only that person’s descendants (display the names of the descendants), using recursion.
 
-// ask user what to search for height,weight,gender,occupation
-// create function to filter out the trait 
-//call the function for the user input switch case
-// reprompt the user what search 
-// create filter to create new array
-// display the people
-// return the filter
-// prompt for any addtional info they want to search by
