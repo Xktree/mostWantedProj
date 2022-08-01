@@ -23,7 +23,6 @@
 // · Tackle this user story LAST!
 
 
-
 // Bonus
 
 // (5 points): As a user, after locating a person, I want to see only that person’s descendants (display the names of the descendants), using recursion.
