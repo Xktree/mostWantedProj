@@ -1,8 +1,8 @@
 // Project User Stories - Total points /75
 
-// (5 points): As a developer, I want to make at least 15 consistent commits with good, descriptive messages.
+// (5 points): As a developer, I want to make at least 15 consistent commits with good, descriptive messages. (DONE)
 
-// (10 points): As a user, I want to be able to search for someone based on a single criterion
+// (10 points): As a user, I want to be able to search for someone based on a single criterion (DONE)
 
 // · You should be able to find and return a list of people who match the search
 

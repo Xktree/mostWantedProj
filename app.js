@@ -75,13 +75,13 @@ function mainMenu(person, people) {
             parentsFilter(person[0], people);
             siblingFilter(person[0], people);
             spouseFilter(person[0], people);
-           return mainMenu(person, people);
+            return mainMenu(person, people);
             break;
         case "descendants":
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
             // HINT: Review recursion lecture + demo for bonus user story
-            let personDescendants = findPersonDescendants(person[0], people);
-            alert(personDescendants);
+            findPersonDescendants(person[0], people);
+            return mainMenu(person, people);
             break;
         case "restart":
             // Restart app() from the very beginning
@@ -254,40 +254,22 @@ function findPersonFamily(familyMember, knownRelationship){
     }
 }
 
-// Function to return a list of descendants - logic similar to parent function 
-// Couldn't figure out solution, returning a undefined error
+// Function to return a list of descendants - logic similar to parent function
 
 function findPersonDescendants(person, people){
-    let descendants = []
+    let userId = person.id;
+    let descendantFound = people.filter(function(person){
+        if(person.parents.includes(userId)){
+            return true;
         }
-
-    function findChildren(person){
-        let familyMember = people.filter(function(child){
-            if(child.parents.includes(person.id)){
-                return true
-            }
-            else{
-                return false
-            }
-        })
-        if(familyMember.length > 0){
-            for(let i = 0; i < familyMember.length; i++){
-                descendants.push(familyMember[i])
-                findChildren(familyMember[i])
-            }
-        }
-        else{
-            return "This individual has no descendants in our database."
-        }
+    })
+    displayPeople(descendantFound);
     }
-    findChildren(person);
-    findPersonFamily(familyMember, "Descendant");
-}
 
 //created Function to show the searchbytraits function and take advatage of switch cases; also created functions for each trait search 
 
 function getGender(people){
-    let userGender = prompt('what gender would you like to search for Male or Female',chars)
+    let userGender = prompt('What gender would you like to search for - Male or Female')
 
     let searchResults = people.filter(function(people){
         if(people.gender === userGender){
@@ -297,7 +279,7 @@ function getGender(people){
     return searchResults
 }
 function getHeight(people){
-    let userHeight = promptFor('What height by inches would you like to search by\n Ex: 70',chars)
+    let userHeight = promptFor('What height by inches would you like to search by\n Ex: 70', chars)
 
     let searchResults = people.filter(function(people){
         if(people.height == userHeight){
@@ -307,7 +289,7 @@ function getHeight(people){
     return searchResults
 }
 function getWeight(people){
-    let userWeight = promptFor('What Weight in lbs would you like to search by\n Ex: 170',chars)
+    let userWeight = promptFor('What weight in lbs would you like to search by\n Ex: 170',chars)
 
     let searchResults = people.filter(function(people){
         if(people.weight == userWeight){
@@ -317,7 +299,7 @@ function getWeight(people){
     return searchResults
 }
 function getEyeColor(people){
-    let userEyeColor = prompt('What eyecolor would you like to search for\n Ex: blue', chars)
+    let userEyeColor = prompt('What eyecolor would you like to search for\n Ex: blue')
     let searchResults = people.filter(function(people){
         if(people.eyeColor === userEyeColor){
             return true;
@@ -326,7 +308,7 @@ function getEyeColor(people){
     return searchResults
 }
 function getOccupation(people){
-    let userOccupation = prompt('What occupation would you like to search for\n Ex: programmer', chars)
+    let userOccupation = prompt('What occupation would you like to search for\n Ex: programmer')
     let searchResults = people.filter(function(people){
         if(people.occupation === userOccupation){
             return true;
@@ -354,7 +336,7 @@ function getResults(searchResults){
 function searchByTraits(people){
     let searchResults = people;
     while(searchResults.length === 0 || searchResults.length > 1){
-        let searchTrait = promptFor('What trait do you want to search by: gender, height, weight, eyecolor, dob, occupation', chars).toLocaleLowerCase();
+        let searchTrait = promptFor('What trait do you want to search by: gender, height, weight, eyecolor, dob, occupation', chars).toLowerCase();
         switch(searchTrait){
             case 'gender':
                 searchResults = getGender(searchResults)
@@ -418,4 +400,23 @@ function searchByTraits(people){
     return searchResults
 }
 
+// Function to validate user input
+function promptFor(question, valid){
+    let validInput;
+    do{
+      var response = prompt(question).trim();
+      validInput = valid(response);
+    } while(response === ""  ||  validInput === false)
+    return response;
+  }
+  
+  // Function to validate yes/no input
+  function yesNo(input){
+    if(input.toLowerCase() == "yes" || input.toLowerCase() == "no"){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 
