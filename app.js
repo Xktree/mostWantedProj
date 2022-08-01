@@ -113,7 +113,7 @@ function mainMenu(person, people) {
     let displayOption = prompt(
         `Found ${person[0].firstName} ${person[0].lastName}. Do you want to know their 'info', 'family', or 'descendants'?\nType the option you want or type 'restart' or 'quit'.`
     );
-    // Routes our application based on the user's input
+    // Routes our application based on the user's input - switch cases based on user input
     switch (displayOption) {
         case "info":
             //! TODO #1: Utilize the displayPerson function ////////////////////////////////////////// (DONE)
@@ -244,6 +244,8 @@ function chars(input) {
 
 // TODO 2: Functions to find family details: parents, siblings, spouse, exception
 
+// Function to return a parent if the individual id matches the index of the id contained within someone else's parents element field
+
 function parentsFilter(person, people){
     let familyMember = people.filter(function(el){
         if(el.id === person.parents[0] || el.id === person.parents [1]){
@@ -255,7 +257,9 @@ function parentsFilter(person, people){
     })
     findPersonFamily(familyMember, "Parent");
 }
-    
+
+// Function to return a sibling if the individual has the same parent id number as anyone else in the data set
+
 function siblingFilter(person, people){
     let familyMember = people.filter(function(el){
     let lengthOfParentString = el.parents;
@@ -274,6 +278,9 @@ function siblingFilter(person, people){
     })
     findPersonFamily(familyMember, "Sibling");
 }
+
+// Function to return a spouse if the individual has a currentSpouse id that matches anyone else in the database
+
 function spouseFilter(person, people){
     let familyMember = people.filter(function(el){
         if(el.currentSpouse === person.id){
@@ -286,6 +293,8 @@ function spouseFilter(person, people){
     findPersonFamily(familyMember, "Spouse");
 }
 
+// Function rule for adding an individual to a array and to account for no familial relations for a certain field for an individual
+
 function findPersonFamily(familyMember, knownRelationship){
     if(familyMember.length < 1){
         alert("There is no individual found for this relations field in our database.")
@@ -295,4 +304,32 @@ function findPersonFamily(familyMember, knownRelationship){
             return knownRelationship + ": " + person.firstName + " " + person.lastName; 
         }).join("\n"));
     }
+}
+
+// Function to return a list of descendants - logic similar to parent function 
+
+function findPersonDescendants(familyMember, people){
+    let descendants = []
+
+    function findChildren(person){
+        let familyMember = people.filter(function(child){
+            if(child.parents.includes(person.id)){
+                return true
+            }
+            else{
+                return false
+            }
+        })
+        if(familyMember.length > 0){
+            for(let i = 0; i < familyMember.length; i++){
+                descendants.push(familyMember[i])
+                findChildren(familyMember[i])
+            }
+        }
+        else{
+            return "This individual has no descendants in our database."
+        }
+    }
+    findChildren(person);
+    findPersonFamily(familyMember, "Descendant");
 }
